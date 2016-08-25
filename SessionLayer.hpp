@@ -1120,7 +1120,6 @@ public:
   void InboundMessage( const ExternalMessage & TheMessage, const Address From )
   {
     std::string Payload = DecodeMessage( TheMessage );
-    Address ReceiverActor;
     
     if ( !Payload.empty() )
     {
@@ -1134,7 +1133,10 @@ public:
       // actor in the resolution process.
       
       auto LocalActor = KnownActors.left.find( TheMessage.GetRecipient() );
-      ReceiverActor   = LocalActor->second;
+
+Address RecipientAddress( LocalActor->second );
+std::cout << "Recipient address " << TheMessage.GetRecipient() 
+	  << " resolves to actor ID = " << RecipientAddress.AsString() << std::endl;
       
       // The senders ID could be more problematic if this is the first message
       // from the remote actor received at this endpoint.
@@ -1145,8 +1147,9 @@ public:
       // message for de-serialisation.
       
       if ( RemoteID != KnownActors.left.end() )
-	Send( PresentationLayer::SerialMessage( 
-	      RemoteID->second, ReceiverActor, Payload ), PresentationServer );
+	Send( PresentationLayer::SerialMessage( RemoteID->second, 
+						LocalActor->second, Payload ), 
+	      PresentationServer );
       else
       {
 	// The remote ID is either under resolution or has to be resolved. 

@@ -286,6 +286,10 @@ protected:
   
   void IncomingMessage( const SerialMessage & TheMessage, const Address From )
   {
+    std::cout << "Presentation layer forwarding message [" 
+              << TheMessage.GetPayload() << "] from " 
+	      << TheMessage.GetSender().AsString() << " to "
+	      << TheMessage.GetSender().AsString() << " => " << std::endl;
     
     TheFramework->Send( SerializedPayload( TheMessage.GetPayload() ), 
 			TheMessage.GetSender(),

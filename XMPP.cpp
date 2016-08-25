@@ -446,7 +446,7 @@ void Link::SubscribeKnownPeers( JabberID NewEndpoint,
     
     ErrorMessage << "Subscribe known peers expected SUBSCRIBE as subject "
 		 << "and got subject " << XMPPMessage->getSubject() 
-		 << " and body = [ " << XMPPMessage->getBody() << "]";
+		 << " and body = [" << XMPPMessage->getBody() << "]";
 		 
     throw std::invalid_argument( ErrorMessage.str() );
   }
