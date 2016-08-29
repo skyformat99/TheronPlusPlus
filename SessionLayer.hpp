@@ -1124,7 +1124,7 @@ public:
     if ( !Payload.empty() )
     {
       // This is a message and not a protocol command, so we can proceed to 
-      // find the local actor to receive this message. This address should 
+      // find the local actor to receive this message. This address shall 
       // exist because when the remote Session Layer server receives this 
       // message for an actor on this endpoint, it will resolve the address for 
       // this actor which involves this endpoint's Session Layer. We should 

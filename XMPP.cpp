@@ -530,6 +530,10 @@ void Link::CreateClient( const Link::NewClient & Request, const Address From )
   
     TheClient->onMessageReceived.connect( 
       [=](Swift::Message::ref XMPPMessage)->void {
+std::cout << NewClientID << " got message from " << XMPPMessage->getFrom()
+          << " with subject " << XMPPMessage->getSubject() << " and body ["
+	  << XMPPMessage->getBody() << "]" << std::endl;
+	  
 	  ProcessMessage( 
 	    OutsideMessage( XMPPMessage->getFrom(), XMPPMessage->getTo(),
 			    XMPPMessage->getBody(), XMPPMessage->getSubject()
